@@ -5,6 +5,7 @@
     <title>PHP!</title>
   </head>
   <body>
+     <p><strong>Things you can doooooooooooooooooo:</strong>
     <img src="http://i1061.photobucket.com/albums/t480/ericqweinstein/php-logo_zps408c82d7.png"/>
     <div class="header"><h1>
       <?php
