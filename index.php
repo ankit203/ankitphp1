@@ -25,6 +25,8 @@ echo "<b>Inside Openconn ttt ". date("Y") ."</b>";
 
   $conn = new mysqli($dbhost, $dbuser, $dbpass,$db) or die("Connect failed: %s\n". $conn -> error);
  
+ echo "<br>"."Connection seems ok.";
+ 
  return $conn;
  }
  
