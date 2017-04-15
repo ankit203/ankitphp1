@@ -1,52 +1,71 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
-  <head>
-    <link type='text/css' rel='stylesheet' href='style.css'/>
-    <title>PHP!</title>
-  </head>
-  <body>
-     <p><strong>Things you can dooooooooooooo:</strong>
-    <img src="http://i1061.photobucket.com/albums/t480/ericqweinstein/php-logo_zps408c82d7.png"/>
-    <div class="header"><h1>
-      <?php
-      $welcome = "Let's get started with PHPppppp!";
-      echo $welcome;
-      ?>
-    </h1></div>
-    <p><strong>Generate a list:</strong>
-      <?php
-      for ($number = 1; $number <= 10; $number++) {
-        if ($number <= 9) {
-            echo $number . ", ";
-        } else {
-            echo $number . "!";
-        }
-      }; ?>
-    </p>
-    <p><strong>Things you can do:</strong>
-      <?php
-        $things = array("Talk to databases",
-        "Send cookies", "Evaluate form data",
-        "Build dynamic webpages");
-        foreach ($things as $thing) {
-            echo "<li>$thing</li>";
-        }
-        
-        unset($thing);
-      ?>
-    </p>
-    <p><strong>This jumbled sentence will change every time you click Submit!<strong></p>
-    <p>
-      <?php
-        $words = array("the ", "quick ", "brown ", "fox ",
-        "jumped ", "over ", "the ", "lazy ", "dog ");
-        shuffle($words);
-        foreach ($words as $word) {
-            echo $word;
-        };
-        
-        unset($word);
-      ?>
-    </p>
-  </body>
+<body>
+<?php
+function OpenCon()
+ {
+echo "<b>Inside Openconn ". date("Y") ."</b>";
+ $dbhost = "bluemix-sandbox-dal-9-portal.8.dblayer.com";
+ $dbuser = "admin";
+ $dbpass = "";
+ $db = "bmix-dal-yp-d5d8d46f-6694-41db-8193-ddf5bdec3682";
+
+  $conn = new mysqli($dbhost, $dbuser, $dbpass,$db) or die("Connect failed: %s\n". $conn -> error);
+ 
+ return $conn;
+ }
+ 
+function CloseCon($conn)
+ {
+ $conn -> close();
+ }
+
+$conn = OpenCon();
+
+echo "<br>"."Connected Successfully to mysql";
+
+$sql = "SELECT id,sal, fname, lname FROM employee";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "<br>"."id:".$row["id"]." - sal: " . $row["sal"]. " - Name: " . $row["fname"]. " " . $row["lname"]. "<br>";
+    }
+} else {
+    echo "0 results";
+}
+
+CloseCon($conn);
+
+?>
+<br>
+<form action="upload.php" method="post" enctype="multipart/form-data">
+    Select image to upload (max sie 500kb - Only jpg,jpeg,png permitted):
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Upload Image" name="submit">
+</form>
+
+<?php
+echo "<br>";
+echo "<br>";
+$_SESSION["favcolor"] = "yellow";
+print_r($_SESSION);echo "<br>";
+echo $_SERVER['SERVER_NAME'];echo "<br>";
+echo $_SERVER['HTTP_HOST'];echo "<br>";
+echo $_SERVER['SCRIPT_NAME'];echo "<br>";
+echo $_SERVER['HTTP_USER_AGENT'];echo "<br>";
+// remove all session variables
+session_unset(); 
+
+// destroy the session 
+session_destroy(); 
+?>
+
+</body>
 </html>
