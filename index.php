@@ -6,6 +6,15 @@ session_start();
 <html>
 <body>
 <?php
+
+ 
+function CloseCon($conn)
+ {
+ $conn -> close();
+ }
+
+$conn = OpenCon();
+ 
 function OpenCon()
  {
 echo "<b>Inside Openconn ". date("Y") ."</b>";
@@ -19,13 +28,6 @@ echo "<b>Inside Openconn ". date("Y") ."</b>";
  return $conn;
  }
  
-function CloseCon($conn)
- {
- $conn -> close();
- }
-
-$conn = OpenCon();
-
 echo "<br>"."Connected Successfully to mysql";
 
 $sql = "SELECT id,sal, fname, lname FROM employee";
