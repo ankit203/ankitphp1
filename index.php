@@ -17,7 +17,7 @@ $conn = OpenCon();
  
 function OpenCon()
  {
-echo "<b>Inside Openconn ". date("Y") ."</b>";
+echo "<b>Inside Openconn ttt ". date("Y") ."</b>";
  $dbhost = "bluemix-sandbox-dal-9-portal.8.dblayer.com";
  $dbuser = "admin";
  $dbpass = "";
